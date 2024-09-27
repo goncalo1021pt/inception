@@ -1,0 +1,24 @@
+version: '3'  # Specify the Compose file format version
+
+services:  # Define the services
+  web:
+    image: nginx:latest  # Use the latest Nginx image
+    ports:
+      - "80:80"  # Map port 80 on the host to port 80 in the container
+    volumes:
+      - ./html:/usr/share/nginx/html  # Mount local directory to the container
+
+  app:
+    build: ./app  # Build from Dockerfile in the ./app directory
+    environment:
+      - DATABASE_URL=postgres://db:5432  # Pass environment variables
+    depends_on:
+      - db  # Specify service dependency
+
+  db:
+    image: postgres:latest  # Use the latest PostgreSQL image
+    volumes:
+      - db_data:/var/lib/postgresql/data  # Persist database data
+
+volumes:  # Define named volumes
+  db_data:
