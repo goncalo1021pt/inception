@@ -4,3 +4,6 @@ docker run -d -p 80:80 dockersamples/101-tutorial
 -p 80:80 - map port 80 of the host to port 80 in the container
 dockersamples/101-tutorial - the image to use
 https://www.youtube.com/watch?v=8fi7uSYlOdc --creating container from scratch
+
+docker build -t my-debian-image .
+docker rmi my-debian-image:latest
