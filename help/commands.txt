@@ -5,5 +5,14 @@ docker run -d -p 80:80 dockersamples/101-tutorial
 dockersamples/101-tutorial - the image to use
 https://www.youtube.com/watch?v=8fi7uSYlOdc --creating container from scratch
 
+docker container rm -f $(docker container ls -aq)
+docker image rm -f $(docker image ls -aq)
+docker ps
+
 docker build -t my-debian-image .
 docker rmi my-debian-image:latest
+Start Services: docker-compose up
+Run in Detached Mode: docker-compose up -d
+Stop Services: docker-compose down
+View Logs: docker-compose logs
+Execute Commands in a Service: docker-compose exec <service_name> <command>

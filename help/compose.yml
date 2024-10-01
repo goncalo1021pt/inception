@@ -1,0 +1,24 @@
+version:   
+
+services:  
+  web:
+    image:   
+    ports:
+      -   
+    volumes:
+      -   
+
+  app:
+    build:   
+    environment:
+      -   
+    depends_on:
+      -   
+
+  db:
+    image:   
+    volumes:
+      -   
+
+volumes:  
+  db_data:
