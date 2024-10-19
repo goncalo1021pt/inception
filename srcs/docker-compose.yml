@@ -18,18 +18,18 @@ services:
     build: 
       context: ./requirements/mariadb
       dockerfile: Dockerfile
-    volumes:
-     -  ./requirements/volumes_tmp/db:/var/lib/mysql
+    # volumes:
+    #  -  ./requirements/volumes_tmp/db:/var/lib/mysql
     restart: on-failure
 
 
-# volumes:
-#   db:
-#     driver: local
-#     driver_opts:
-#       type: none
-#       o: bind
-#       device: ./requirements/volumes_tmp/db
+volumes:
+  db:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./requirements/volumes_tmp/db
 #   wordpress:
 #     driver: local
 #     driver_opts:

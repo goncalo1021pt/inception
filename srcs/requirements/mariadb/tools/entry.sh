@@ -2,10 +2,10 @@
 
 #!/bin/bash
 chown -R mysql:mysql /var/lib/mysql
-ls -l /var/lib >> /tmp/errorlog
-pwd >> /tmp/errorlog
+# ls -l /var/lib >> /tmp/errorlog
+# pwd >> /tmp/errorlog
 service mariadb start;
-echo $? >> /tmp/errorlog
+# echo $? >> /tmp/errorlog
 tail -f /dev/null
 #     service mariadb start;
 #     sleep 3;
