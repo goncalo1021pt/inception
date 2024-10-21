@@ -1,6 +1,6 @@
 NAME = Inception
 SRCS = srcs/docker-compose.yml
-VOLUMES = srcs/requirements/volumes_tmp
+VOLUMES = /home/$(USER)/data/db /home/$(USER)/data/wordpress
 
 # Color codes
 GREEN = \033[0;32m
@@ -12,18 +12,24 @@ NC = \033[0m
 
 all: start
 
-start:
+start: volumes
 	@echo "$(GREEN)Starting $(NAME)$(NC)"
-	@docker-compose -f $(SRCS) up -d --build
+	@docker-compose -f $(SRCS) up -d --build --force-recreate
 
 stop:
 	@echo "$(RED)Stopping $(NAME)$(NC)"
 	@docker-compose -f $(SRCS) down
 
+volumes:
+	@echo "$(BLUE)Creating volumes$(NC)"
+	@mkdir -p $(VOLUMES)
+
 clean: stop
-	docker-compose -f $(SRCS) down --rmi all
 	sudo rm -rf $(VOLUMES)
 
-re: stop start
+fclean: clean
+	docker-compose -f $(SRCS) down --rmi all
+
+re: fclean start
 
 .PHONY: all start stop

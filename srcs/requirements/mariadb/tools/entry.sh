@@ -1,22 +1,21 @@
-# template for entry.sh
-
 #!/bin/bash
-chown -R mysql:mysql /var/lib/mysql
-# ls -l /var/lib >> /tmp/errorlog
-# pwd >> /tmp/errorlog
-service mariadb start;
-# echo $? >> /tmp/errorlog
-tail -f /dev/null
-#     service mariadb start;
-#     sleep 3;
 
-#     mysql -u root -e "CREATE DATABASE IF NOT EXISTS \`${SQL_DATABASE}\`;"
-#     mysql -u root -e "CREATE USER IF NOT EXISTS \`${SQL_USER}\`@'%' IDENTIFIED BY '${SQL_PASSWORD}';"
-#     mysql -u root -e "GRANT ALL PRIVILEGES ON *.* TO \`${SQL_USER}\`@'%';"
-#     mysql -u root -e "FLUSH PRIVILEGES";
+if [ ! -d /var/lib/mysql/mysql ]; then
 
-#     mysqladmin -u root password "$SQL_PASSWORD"
-#     mysqladmin -u root -p"$SQL_ROOT_PASSWORD" shutdown
-#     echo    "DATABASE CREATED!!"
+	service mariadb start;
 
-# exec mysqld_safe --bind-address=*
+	# wait for the service to start
+	while true; do
+		if [ -f /var/run/mysqld/mysqld.pid ]; then
+			break;
+		fi
+		sleep 1;
+	done
+
+	mysql -u root -e "CREATE DATABASE IF NOT EXISTS $SQL_DB;"
+	mysql -u root -e "CREATE USER IF NOT EXISTS '$SQL_USER'@'%' IDENTIFIED BY '$SQL_PASS';"
+	mysql -u root -e "GRANT ALL PRIVILEGES ON $SQL_DB.* TO '$SQL_USER'@'%';"
+	mysql -u root -e "FLUSH PRIVILEGES;"
+
+fi
+mysqld --bind-address=0.0.0.0
