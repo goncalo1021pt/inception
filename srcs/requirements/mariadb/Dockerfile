@@ -1,14 +1,15 @@
-FROM debian:oldoldstable
+FROM debian:oldstable
 
 RUN apt-get update && apt-get install -y mariadb-server
-RUN apt-get install -y vim && apt-get install -y systemd
 
-RUN mkdir -p /var/run/mysqld /var/lib/mysql && \
-    chown -R mysql:mysql /var/run/mysqld /var/lib/mysql && \
-    chmod -R 755 /var/run/mysqld /var/lib/mysql
+RUN mkdir -p /var/run/mysqld
+RUN chown -R mysql:mysql /var/run/mysqld
 
 WORKDIR /var/run/mysqld
 
+COPY ./tools/entry.sh /usr/local/bin/entry.sh
+RUN chmod +x /usr/local/bin/entry.sh
+
 EXPOSE 3306
 
-CMD [ "tail", "-f", "/dev/null" ]
+ENTRYPOINT [ "bash", "/usr/local/bin/entry.sh" ]
