@@ -42,7 +42,6 @@ services:
 networks:
   inception:
     driver: bridge
-
 volumes:
   db:
     driver: local

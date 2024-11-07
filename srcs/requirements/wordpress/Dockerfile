@@ -10,12 +10,13 @@ RUN sed -i 's|listen = /run/php/php7.4-fpm.sock|listen = 9000|g' /etc/php/7.4/fp
 WORKDIR /var/www/html
 
 # Install wp-cli
-RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phars
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 RUN chmod +x wp-cli.phar
 RUN mv wp-cli.phar /bin/wp
 
 RUN mkdir -p /run/php
-COPY tools/entry.sh /usr/local/bin/wordpress.sh
+COPY tools/entry.sh /etc/wordpress.sh
 
-COPY tools/wordpress.sh /etc/wordpress.sh
+ENTRYPOINT [ "bash", "/etc/wordpress.sh" ]
 
+# CMD [ "tail", "-f", "/dev/null" ]
