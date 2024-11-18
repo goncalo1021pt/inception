@@ -7,7 +7,7 @@ RUN chown -R mysql:mysql /var/run/mysqld
 
 WORKDIR /var/run/mysqld
 
-COPY ./tools/entry.sh /usr/local/bin/entry.sh
+COPY tools/entry.sh /usr/local/bin/entry.sh
 RUN chmod +x /usr/local/bin/entry.sh
 
 EXPOSE 3306
