@@ -14,4 +14,6 @@ EXPOSE 3306
 
 USER mysql
 
-ENTRYPOINT [ "bash", "/usr/local/bin/entry.sh" ]
+# ENTRYPOINT [ "bash", "/usr/local/bin/entry.sh" ]
+
+CMD [ "tail", "-f", "/dev/null" ]

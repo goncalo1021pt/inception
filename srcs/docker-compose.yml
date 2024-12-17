@@ -38,10 +38,10 @@ services:
       - inception
     restart: on-failure
 
-
 networks:
   inception:
     driver: bridge
+
 volumes:
   db:
     driver: local

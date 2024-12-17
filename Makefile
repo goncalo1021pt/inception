@@ -27,8 +27,10 @@ volumes:
 clean: stop
 	sudo rm -rf $(VOLUMES)
 
-fclean: clean
-	docker-compose -f $(SRCS) down --rmi all
+fclean: clean # change if you are using more then 1 docker in your machine
+#	docker-compose -f $(SRCS) down --rmi all
+#	docker rmi -f $(docker images -q)
+#	docker volume rm $(docker volume ls -q)
 
 re: fclean start
 
