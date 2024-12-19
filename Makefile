@@ -25,12 +25,10 @@ volumes:
 	@mkdir -p $(VOLUMES)
 
 clean: stop
-	sudo rm -rf $(VOLUMES)
+	docker volume rm -f srcs_db srcs_wordpress
 
 fclean: clean # change if you are using more then 1 docker in your machine
-#	docker-compose -f $(SRCS) down --rmi all
-#	docker rmi -f $(docker images -q)
-#	docker volume rm $(docker volume ls -q)
+	docker system prune -a
 
 re: fclean start
 

@@ -17,6 +17,6 @@ RUN mv wp-cli.phar /usr/local/bin/wp
 RUN mkdir -p /run/php
 COPY tools/entry.sh /etc/wordpress.sh
 
-ENTRYPOINT [ "bash", "/etc/wordpress.sh" ]
+# ENTRYPOINT [ "bash", "/etc/wordpress.sh" ]
 
-# CMD [ "tail", "-f", "/dev/null" ]
+CMD [ "tail", "-f", "/dev/null" ]

@@ -4,7 +4,7 @@ if [ ! -d /var/lib/mysql/mysql ]; then
 
 	service mariadb start;
 
-	wait for the service to start
+	# wait for the service to start
 	while true; do
 		if [ -f /var/run/mysqld/mysqld.pid ]; then
 			break;
@@ -20,5 +20,3 @@ if [ ! -d /var/lib/mysql/mysql ]; then
 
 fi
 mysqld --bind-address=0.0.0.0
-
-tail -f /dev/null
