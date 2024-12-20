@@ -18,5 +18,3 @@ RUN mkdir -p /run/php
 COPY tools/entry.sh /etc/wordpress.sh
 
 ENTRYPOINT [ "bash", "/etc/wordpress.sh" ]
-
-# CMD [ "tail", "-f", "/dev/null" ]

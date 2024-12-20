@@ -14,7 +14,7 @@ all: start
 
 start: volumes
 	@echo "$(GREEN)Starting $(NAME)$(NC)"
-	@docker-compose -f $(SRCS) up -d --build --force-recreate
+	@docker-compose -f $(SRCS) up --build --force-recreate
 
 stop:
 	@echo "$(RED)Stopping $(NAME)$(NC)"
@@ -28,7 +28,7 @@ clean: stop
 	docker volume rm -f srcs_db srcs_wordpress
 	sudo rm -rf $(VOLUMES)
 
-fclean: clean # change if you are using more then 1 docker in your machine
+fclean: clean # DON'T USE THIS COMMAND UNLESS YOU WANT TO DELETE ALL DOCKER IMAGES
 	docker system prune -a
 
 re: fclean start
