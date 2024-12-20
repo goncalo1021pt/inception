@@ -1,19 +1,11 @@
 FROM debian:oldstable
 
-RUN apt-get update && apt-get install -y mariadb-server
+RUN apt-get update -y && apt-get upgrade -y
 
-RUN mkdir -p /var/run/mysqld
-RUN chown -R mysql:mysql /var/run/mysqld
+WORKDIR /var/lib/mysql
 
-WORKDIR /var/run/mysqld
+RUN apt-get install -y mariadb-server
 
-COPY tools/entry.sh /usr/local/bin/entry.sh
-RUN chmod +x /usr/local/bin/entry.sh
+COPY tools/entry.sh /etc/entry.sh
 
-EXPOSE 3306
-
-USER mysql
-
-# ENTRYPOINT [ "bash", "/usr/local/bin/entry.sh" ]
-
-CMD [ "tail", "-f", "/dev/null" ]
+ENTRYPOINT ["bash", "/etc/entry.sh"]

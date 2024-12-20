@@ -26,6 +26,7 @@ volumes:
 
 clean: stop
 	docker volume rm -f srcs_db srcs_wordpress
+	sudo rm -rf $(VOLUMES)
 
 fclean: clean # change if you are using more then 1 docker in your machine
 	docker system prune -a
